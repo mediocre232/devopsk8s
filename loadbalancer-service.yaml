@@ -34,3 +34,9 @@ spec:
       containers:
       - name: frontend-container
         image: nginx
+        #classic loadbalancer yaml file
+        
+        #kubectl apply -f loadbalancer-service.yaml
+        # deploy command 
+        
+        
