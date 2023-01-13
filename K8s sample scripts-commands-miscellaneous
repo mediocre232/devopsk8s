@@ -1,0 +1,59 @@
+eksctl create cluster --name eksctl -test --nodegroup-name ng-default  --node-type t3.micro --nodes 2
+# create 2 nodes t3 micro in eks withg cloudformation
+
+Kubectl apply -f nginx-deployment-withrolling.yaml
+#create pods
+
+kubectl get all
+#lists all pods/nodes
+
+kubectl delete pod testdeploy-586b7f8654-8bgbm 
+# delete specific pod example 
+
+kubectl get rs
+#get rep;ica set
+
+kubectl delete rs testdeploy-586b7f8654
+#delete rs
+
+kubectl describe pods
+# describe pods and what image it is returning 
+
+
+
+kubectl describe deployment
+# gives depploy details ex:
+Name:                   testdeploy
+Namespace:              default
+CreationTimestamp:      Thu, 12 Jan 2023 21:37:49 -0500
+Labels:                 environment=test
+Annotations:            deployment.kubernetes.io/revision: 1
+Selector:               environment=test
+Replicas:               3 desired | 3 updated | 3 total | 0 available | 3 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        10
+RollingUpdateStrategy:  0 max unavailable, 1 max surge
+Pod Template:
+  Labels:  environment=test
+  Containers:
+   nginx:
+    Image:        nginx:1.16
+    Port:         <none>
+    Host Port:    <none>
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      False   MinimumReplicasUnavailable
+  Progressing    False   ProgressDeadlineExceeded
+OldReplicaSets:  <none>
+
+
+eks-demos % kubectl get rs --watch
+# gives following output  
+NAME                    DESIRED   CURRENT   READY   AGE
+testdeploy-586b7f8654   3         3         0       24m
+
+
